@@ -46,9 +46,9 @@ public class SparqlQueryEvaluatorDefaultTest {
         SparqlQueryEvaluator sparqlQueryEvaluator = new SparqlQueryEvaluatorDefault();
 
         String queryString = "SELECT ?subject ?predicate ?object WHERE { ?subject ?predicate ?object} ";
-        String[] namedGraphUris = new String[] {};
+        String[] namedGraphUris = null;//new String[] {};
 
-        String defaultGraphUri = null;
+        String[] defaultGraphUri = null;//new String[] {};
 
         sparqlQueryEvaluator.evaluate(evaluateResult, repo, queryString, null,
                 defaultGraphUri, namedGraphUris);
@@ -71,7 +71,7 @@ public class SparqlQueryEvaluatorDefaultTest {
 
         String queryString = "SELECT ?subject ?predicate ?object WHERE { ?subject ?predicate ?object} ";
         String[] namedGraphUris = new String[] {};
-        String defaultGraphUri = CTX1.stringValue();
+        String[] defaultGraphUri = new String[] {CTX1.stringValue()};
 
         sparqlQueryEvaluator.evaluate(evaluateResult, repo, queryString, null,
                 defaultGraphUri, namedGraphUris);
@@ -94,13 +94,13 @@ public class SparqlQueryEvaluatorDefaultTest {
 
         String queryString = "SELECT ?subject ?predicate ?object WHERE { ?subject ?predicate ?object} ";
         String[] namedGraphUris = new String[] {CTX2.stringValue()};
-        String defaultGraphUri = CTX1.stringValue();
+        String[] defaultGraphUri = new String[] {CTX1.stringValue()};
 
         sparqlQueryEvaluator.evaluate(evaluateResult, repo, queryString, null,
                 defaultGraphUri, namedGraphUris);
 
         ArrayNode bindingArray = asArrayNode(evaluateResult);
-        assertEquals(4, bindingArray.size());
+        assertEquals(2, bindingArray.size());
     }
 
     @Test
@@ -116,8 +116,8 @@ public class SparqlQueryEvaluatorDefaultTest {
         SparqlQueryEvaluator sparqlQueryEvaluator = new SparqlQueryEvaluatorDefault();
 
         String queryString = "SELECT ?subject ?predicate ?object WHERE { ?subject ?predicate ?object} ";
-        String[] namedGraphUris = new String[] {CTX1.stringValue(), CTX2.stringValue()};
-        String defaultGraphUri = null;
+        String[] namedGraphUris = new String[] {};
+        String[] defaultGraphUri = new String[] {CTX1.stringValue(), CTX2.stringValue()};
 
         sparqlQueryEvaluator.evaluate(evaluateResult, repo, queryString, null,
                 defaultGraphUri, namedGraphUris);
